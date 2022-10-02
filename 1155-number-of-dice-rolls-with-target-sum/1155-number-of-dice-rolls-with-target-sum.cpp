@@ -2,30 +2,23 @@ class Solution {
 public:
     int numRollsToTarget(int n, int k, int target) 
     {
-        map <string , int> m;
-        return (nbrWays(n, k, target, m));
-    }
-    
-    int nbrWays(int n, int k , int target, map <string, int> &m)
-    {
-        if (target < 0)
-            return (0);
-        if (n == 0)
+        int mod = 1000000007;
+        vector <vector <int>>  dp(n + 1 , vector<int> (target + 1, 0));
+        dp[0][0] = 1;
+        for (int i = 1; i <= n; i++)
         {
-            if (target == 0)
-                return (1);
-            return (0);
+            for (int j = 0; j <= target; j++)
+            {
+                for (int t = 1; t <= k ;t++)
+                {
+                    if (j < t)
+                        continue;
+                    dp[i][j] = (dp[i][j] + dp[i - 1][j - t]) % mod;
+                }
+                 
+            }
+           
         }
-        string key = "" + to_string(n) + to_string(k) + to_string(target);
-        if (m.find(key) != m.end())
-            return (m[key]);
-        int nbWay = 0;
-        for (int i = 1; i <= k;i++)
-        {
-           int res = nbrWays(n - 1, k, target - i,m);
-            nbWay = (nbWay + res) % 1000000007;
-            m[key]  = nbWay;
-        }
-        return (nbWay);
+        return (dp[n][target]);
     }
 };
