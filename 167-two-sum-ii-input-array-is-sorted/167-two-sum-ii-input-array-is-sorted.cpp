@@ -3,16 +3,20 @@ public:
     vector<int> twoSum(vector<int>& numbers, int target) 
     {
         vector <int> ans(2,0);
-        map<int, int> m;
-        for (int i = 0; i < numbers.size(); i++)
+        int i = 0, j = numbers.size() - 1;
+        while (i < j)
         {
-            int nbToFind = target - numbers[i];
-            if (m.find(nbToFind) != m.end())
+            int sum = numbers[i] + numbers[j];
+            if (target == sum)
             {
-                ans[0] = m[nbToFind] + 1;
-                ans[1] = i + 1;
+                ans[0] = i + 1;
+                ans [1] = j + 1;
+                break ;
             }
-            m[numbers[i]] = i;
+            else if (sum > target)
+                j--;
+            else
+                i++;
         }
         return (ans);
     }
