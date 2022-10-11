@@ -25,12 +25,22 @@ public:
                 }
             }
             //printf ("count = %d ===== ",cnt);
-            for (int i = 0; i < 3; i++)
+            // for (int i = 0; i < 3; i++)
                 //printf("%d ", tab[i]);
-            printf("\n");
+            //printf("\n");
             if (cnt == 3)
                 return (true);
         }
         return (false);
     }
 };
+
+// 1 4 2 5 1
+
+/*
+f = 3
+s = 4
+f = 2
+
+*/
+// 1 5 0 4 1 3
